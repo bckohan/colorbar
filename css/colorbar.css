@@ -1,0 +1,104 @@
+/* Common Styles */
+    *,
+    body {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 14px;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    /* Simulate drop-down box */
+    .colormap-select-box {
+      position: relative;
+      margin: 50px 0 0 100px;
+    }
+
+    .colormap-select-box .colormap-select-input {
+      line-height: 20px;
+      border: 1px solid #d6d6d6;
+      cursor: pointer;
+      width: 170px;
+      height: 50px;
+      border: 1px solid transparent;
+      outline: none;
+      border-radius: 30px;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px;
+      text-indent: 30px;
+      font-size: 16px;
+      font-weight: 400;
+      /* color: rgba(187, 187, 187, 1); */
+      color: rgba(34, 34, 34, 1);
+      line-height: 22px;
+      margin: 0;
+      background: rgba(247, 247, 247, 1) url('./static/imgs/arrow-down.png') no-repeat scroll 130px center;
+      background-size: 20px 20px;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    /** input placeholder Color Change**/
+    .colormap-select-box .colormap-select-input::-webkit-input-placeholder {
+      /* WebKit browsers */
+      color: rgba(187, 187, 187, 1);
+    }
+
+    .colormap-select-box .colormap-select-input:-moz-placeholder {
+      /* Mozilla Firefox 4 to 18 */
+      color: rgba(187, 187, 187, 1);
+    }
+
+    .colormap-select-box .colormap-select-input::-moz-placeholder {
+      /* Mozilla Firefox 19+ */
+      color: rgba(187, 187, 187, 1);
+    }
+
+    .colormap-select-box .colormap-select-input:-ms-input-placeholder {
+      /* Internet Explorer 10+ */
+      color: rgba(187, 187, 187, 1);
+    }
+
+    .colormap-select-box .colormap-select-input.isActive {
+      background-color: #ffffff;
+      border: 1px solid rgba(204, 204, 204, 1);
+      background-image: url(./static/imgs/arrow-up.png);
+    }
+
+    .colormap-select-box .colormap-options-box {
+      position: absolute;
+      top: 55px;
+      left: 0;
+      width: 170px;
+      overflow-y: scroll;
+      overflow-x: hidden;
+      width: 170px;
+      height: 225px;
+      background: rgba(255, 255, 255, 1);
+      box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25);
+      border-radius: 5px;
+    }
+
+    .colormap-select-box .colormap-options-box li {
+      width: 170px;
+      height: 45px;
+      text-indent: 30px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 400;
+      color: rgba(34, 34, 34, 1);
+      line-height: 45px;
+      background: rgba(255, 255, 255, 1);
+    }
+
+    .colormap-select-box .colormap-options-box li.active {
+      background-color: rgba(247, 247, 247, 1);
+      color: rgba(2, 176, 159, 1)
+    }

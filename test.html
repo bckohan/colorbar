@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>Colorbar Test</title>
+        <link href="./css/colorbar.css" rel="stylesheet">
+        <script src="./js/colorbar.js"></script>
+        <script src="./js/data/sequential.js"></script>
+        <script src="./js/data/diverging.js"></script>
+        <script src="./js/data/uniformSequential.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    </header>
+    <body>
+        <div id="colormaps">
+        </div>
+
+    </body>
+    <script>
+        let bars = [];
+        let colormaps = $('#colormaps');
+
+        /*
+        for (const [name, cmap] of Object.entries(Colorbar.cmaps)) {
+            let cb = new Colorbar(name, [0, 100]);
+
+            console.log(Colorbar.rgbToHex(cb.map(0.78125)));
+            let svgBar = cb.svg(name, {width: 400, height: 20});
+            svgBar.setAttribute('title', name);
+            colormaps.append(svgBar);
+
+            bars.push(cb);
+            colormaps.append('<br/>');
+        }*/
+
+        colormaps.append(Colorbar.selectDropdown('select-cmap'));
+
+    </script>
+
+    <script>
+
+        $( document ).ready(function() {
+            // Determine if there is a class
+            function hasClass(ele, cls) {
+              return ele.className.match(new RegExp("(\\s|^)" + cls + "(\\s|$)"));
+            }
+            // //Add a style to the specified dom element
+            function addClass(ele, cls) {
+              if (!hasClass(ele, cls)) ele.className += " " + cls;
+            }
+            // //Remove the style of the specified dom element
+            function removeClass(ele, cls) {
+              if (hasClass(ele, cls)) {
+                var reg = new RegExp("(\\s|^)" + cls + "(\\s|$)");
+                ele.className = ele.className.replace(reg, " ");
+              }
+            }
+            // //If it exists (does not exist), delete (add) a style
+            // function toggleClass(ele, cls) {
+            //   if (hasClass(ele, cls)) {
+            //     removeClass(ele, cls);
+            //   } else {
+            //     addClass(ele, cls);
+            //   }
+            // }
+        
+            document.getElementsByClassName('colorbar-select-input')[0].onclick = function () {
+              var optionsBox = document.getElementsByClassName('colorbar-options-box')[0];
+              var selectInput = document.getElementsByClassName('colorbar-select-input')[0];
+              // Better use children here than childNode, otherwise there will be extra text nodes
+              var lis = optionsBox.children;
+              if (hasClass(optionsBox, 'hide')) { // If the option state is not currently open
+                removeClass(optionsBox, 'hide')
+                addClass(selectInput, 'isActive')
+                for (var i = 0; i < lis.length; i++) {
+                  if (lis[i].innerHTML == selectInput.value) { // Activate previous options if they have been previously selected
+                    addClass(lis[i], 'active')
+                  } else {
+                    removeClass(lis[i], 'active')
+                  }
+                }
+              } else {
+                addClass(optionsBox, 'hide');
+                removeClass(selectInput, 'isActive');
+              }
+            }
+        
+            document.getElementsByClassName('colorbar-options-box')[0].onclick = function (e) {
+              var optionsBox = document.getElementsByClassName('colorbar-options-box')[0];
+              var selectInput = document.getElementsByClassName('colorbar-select-input')[0];
+              //This line and the next line are for compatibility with IE8 and below
+              e = e || window.event;
+              var target = e.target || e.srcElement;
+              if (target.tagName.toLowerCase() === "li") {
+                // Assign the selected value to the display box text
+                selectInput.value = target.innerHTML;
+                // Close Selection List
+                addClass(optionsBox, 'hide');
+                // Unactivate the display box
+                removeClass(selectInput, 'isActive');
+              }
+            }
+            
+            // Option Skip Effect in List
+            document.getElementsByClassName('colorbar-options-box')[0].onmouseover = function (e) {
+            // Event Agent
+              var optionsBox = document.getElementsByClassName('colorbar-options-box')[0];
+              var selectInput = document.getElementsByClassName('colorbar-select-input')[0];
+              e = e || window.event;
+              var target = e.target || e.srcElement;
+              if (target.tagName.toLowerCase() === "li") {
+                if (target.innerHTML != selectInput.value) { //Give temporary skip effect if skipping is not already selected
+                  addClass(target, 'active');
+                }
+              }
+            }
+        
+            document.getElementsByClassName('colorbar-options-box')[0].onmouseout = function (e) {
+              var optionsBox = document.getElementsByClassName('colorbar-options-box')[0];
+              var selectInput = document.getElementsByClassName('colorbar-select-input')[0];
+              //This line and the next line are for compatibility with IE8 and below
+              e = e || window.event;
+              var target = e.target || e.srcElement;
+              if (target.tagName.toLowerCase() === "li") {
+                if (target.innerHTML != selectInput.value) { // If the slide is not already selected, cancel the effect of the slide
+                  removeClass(target, 'active');
+                }
+              }
+            }
+      });
+    </script>
+</html>
